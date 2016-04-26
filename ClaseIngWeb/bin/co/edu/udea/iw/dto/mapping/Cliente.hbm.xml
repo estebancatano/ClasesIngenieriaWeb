@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/04/2016 07:11:45 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping default-lazy="false">
+    <class name="co.edu.udea.iw.dto.Cliente" table="clientes">
+        <id name="cedula" type="java.lang.String">
+            <column name="Cedula" length="15"/>
+            <generator class="assigned" />
+        </id>
+        <property name="apellidos" type="java.lang.String">
+            <column name="Apellidos" not-null="true" length="30"/>
+        </property>
+        <property name="nombres" type="java.lang.String">
+            <column name="Nombres" not-null="true" length="30"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="Email" not-null="true" length="120"/>
+        </property>
+        <many-to-one name="usuarioCrea" class="co.edu.udea.iw.dto.Usuario"
+        		fetch="join">
+        	<column name="UsuarioCrea" length="15" not-null="true"/>
+        </many-to-one>
+        <property name="fechaCreacion" type="java.util.Date">
+            <column name="FechaCreacion" not-null="true" />
+        </property>
+        <many-to-one name="usuarioModifica" class="co.edu.udea.iw.dto.Usuario"
+        		fetch="join">
+        	<column name="UsuaarioModifica" not-null="true" length="15"/>
+        </many-to-one>
+        <property name="fechaModificacion" type="java.util.Date">
+            <column name="FechaModificacion" not-null="false"/>
+        </property>
+        <property name="eliminado" type="boolean">
+            <column name="Eliminado" not-null="false" precision="1" />
+        </property>
+        <many-to-one name="usuarioElimina" class="co.edu.udea.iw.dto.Usuario"
+        		fetch="join">
+        	<column name="UsuaarioElimina" not-null="true" length="15"/>
+        </many-to-one>
+        <property name="fechaEliminacion" type="java.lang.String">
+            <column name="FechaEliminacion" not-null="false" />
+        </property>
+        <set name="direcciones">
+        	<key column="Cliente"/>
+        	<one-to-many class="co.edu.udea.iw.dto.Direccion"/>
+        </set>
+    </class>
+</hibernate-mapping>
