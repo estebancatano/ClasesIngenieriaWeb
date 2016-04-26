@@ -53,5 +53,12 @@ public interface ClienteDAO {
 	 */
 	public Cliente obtener(String cedula) throws MyException;
 	
+	/**
+	 *  Metodo para obtener una lista de clientes de la base de datos
+	 * @param nombreColumna Nombre de la columna en la base de datos
+	 * @param valorColumna Dato con  el que se quiere buscar en la columna especificada
+	 * @return Lista de Cliente con la información del cliente consultado
+	 * @throws MyException Manejador de excepciones personalizado
+	 */
 	public List<Cliente> obtener(String nombreColumna, String valorColumna) throws MyException;
 }

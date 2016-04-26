@@ -3,6 +3,9 @@
  */
 package co.edu.udea.iw.bl;
 
+import java.util.List;
+
+import co.edu.udea.iw.dto.Cliente;
 import co.edu.udea.iw.util.exception.MyException;
 
 /**
@@ -26,4 +29,30 @@ public interface ClienteBL {
 	 */
 	public void guardar(String cedula, String nombres, String apellidos,
 			String email, String usuarioCrea) throws MyException;
+	
+	/**
+	 * 
+	 * @param cedula
+	 * @throws MyException
+	 */
+	public void eliminar(String cedula) throws MyException;
+
+	/**
+	 * 
+	 * @param cedula
+	 * @param nombres
+	 * @param apellidos
+	 * @param email
+	 * @param usuarioModifica
+	 * @throws MyException
+	 */
+	public void actualizar(String cedula, String nombres, String apellidos,
+			String email, String usuarioModifica) throws MyException;
+	
+	/**
+	 * 
+	 * @return
+	 * @throws MyException
+	 */
+	public List<Cliente> obtener() throws MyException;
 }
