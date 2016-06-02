@@ -21,7 +21,10 @@ app.controller('cliente',function($scope, Clientes, $location){
 		correo : ''
 	};
 	$scope.guardar = function(){
+		console.log('Cliente insertar');
+		console.log($scope.cliente);
 		Clientes.clientes($scope.cliente).success(function(data){
+			console.log("Inserté el cliente");
 			$location.url('/');
 		});
 	};
@@ -46,7 +49,7 @@ app.controller('listaClientes',function($scope, Clientes, $location){
 		
 	});
 	$scope.agregar = function(){
-		$location.url('/cliente');
+		$location.url('/Cliente');
 	};
 });
 
@@ -58,6 +61,7 @@ app.service('Clientes',function($http){
 		});
 	};
 	this.clientes = function(cliente){
+		console.log(cliente);
 		return $http({
 			method: 'POST',
 			url: insertaCliente,
