@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="appPreguntas">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Preguntas Angular</title>
+	<script src="../resources/js/angular.min.js"></script>
+	<script src="../resources/js/preguntas.js"></script>
+	
+</head>
+<body ng-controller="ControllerPreguntas">
+	<div	ng-repeat="pre in preguntas">
+		<span>{{pre.texto}}</span>
+		<div ng-repeat="res in pre.respuestas">
+			<input type="radio" ng-model="pre.respuesta"
+				name="Pregunta{{pre.id}}"
+				id="Pregunta{{pre.id}}{{res.id}}"
+				ng-change="validar(pre)"/>
+			<span>{{res.texto}}</span>
+		</div>
+	</div>
+</body>
+</html>

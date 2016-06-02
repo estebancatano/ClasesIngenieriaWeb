@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.udea.iw.exception.IWDaoException;
 import co.edu.udea.iw.exception.IWServiceException;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @ContextConfiguration(locations = "classpath:configuracion.xml")

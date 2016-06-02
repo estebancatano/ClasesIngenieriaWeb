@@ -22,7 +22,6 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
 		
 		try{
 			Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-			
 			Criteria criteria = session.createCriteria(Ciudad.class);
 			
 			ciudades = criteria.list();
