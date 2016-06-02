@@ -1,7 +1,33 @@
-var app = angular.module('clientes',[]);
+var app = angular.module('clientes',['ngRoute']);
 var servicioLista = 'http://localhost:8080/WebServicesIngWeb/rest/Cliente';
+var insertaCliente = 'http://localhost:8080/WebServicesIngWeb/rest/Cliente/nuevoCliente';
 
-app.controller('listaClientes',function($scope, Clientes){
+app.config(['$routeProvider', function($routeProvider){
+	$routeProvider.when('/',{
+		templateUrl: 'tablaClientes.html',
+		controller: 'listaClientes'
+	});
+	$routeProvider.when('/Cliente',{
+		templateUrl: 'cliente.html',
+		controller: 'cliente'
+	});
+}]);
+
+app.controller('cliente',function($scope, Clientes, $location){
+	$scope.cliente = {
+		cedula : '',
+		nombres : '',
+		apellidos: '',
+		correo : ''
+	};
+	$scope.guardar = function(){
+		Clientes.clientes($scope.cliente).success(function(data){
+			$location.url('/');
+		});
+	};
+});
+
+app.controller('listaClientes',function($scope, Clientes, $location){
 	Clientes.listaClientes().success(function(data){
 		var lista = data.clienteDTOWS;
 		var l = lista.length;
@@ -19,6 +45,9 @@ app.controller('listaClientes',function($scope, Clientes){
 		}
 		
 	});
+	$scope.agregar = function(){
+		$location.url('/cliente');
+	};
 });
 
 app.service('Clientes',function($http){
@@ -26,6 +55,18 @@ app.service('Clientes',function($http){
 		return $http({
 			method: 'GET',
 			url: servicioLista
+		});
+	};
+	this.clientes = function(cliente){
+		return $http({
+			method: 'POST',
+			url: insertaCliente,
+			params: {
+				cedula: cliente.cedula,
+				nombres: cliente.nombres,
+				apellidos: cliente.apellidos,
+				correo: cliente.correo
+			}
 		});
 	};
 });

@@ -3,13 +3,16 @@ package co.edu.udea.iw.ws;
 import co.edu.udea.iw.service.ClienteService;
 import javassist.tools.rmi.RemoteException;
 
+import java.awt.event.TextEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Component;
 import co.edu.udea.iw.dto.Cliente;
 import co.edu.udea.iw.dto.ClienteDTOWS;
 import co.edu.udea.iw.exception.IWDaoException;
+import co.edu.udea.iw.exception.IWServiceException;
 
 //se agregan mínimo dos notaciones para se webservice
 @Component
@@ -50,4 +54,20 @@ public class ClienteWS {
 		}
 		return lista;
 	}
+	
+	@Produces(MediaType.TEXT_PLAIN)
+	@POST
+	@Path("nuevoCliente")
+	public String insertarCliente(@QueryParam("cedula")String cedula,
+			@QueryParam("nombres")String nombres, @QueryParam("apellidos")String apellidos,
+			@QueryParam("correo")String correo){
+		try {
+			clienteService.guardaCliente(cedula, nombres, apellidos, correo, "elver");
+			return "";
+		} catch (IWDaoException | IWServiceException e) {
+			// TODO Auto-generated catch block
+			return e.getMessage();
+		}
+	}
+	
 }
